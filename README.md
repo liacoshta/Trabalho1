@@ -1,10 +1,10 @@
 # EA876 Trabalho1
 ## Criadoras :
-Anne-Laure Stéphanie Capé RA:230807
-Lia
+* Anne-Laure Stéphanie Capé RA:230807
+* Lia
 ## Docentes
-Thiago Tavares
-Rafael Ferrari
+* Thiago Tavares
+* Rafael Ferrari
 ## Objetivo
 O programa gerado converte expressões matemáticas para um
 código assembly equivalente usando uma linguagem assembly para o simple 8-bit
