@@ -12,7 +12,7 @@ assembly simulator.
 Linguagem de implementação : Lex/Flex, Yacc/Bison e C.
 A calculadora suporta soma, divisão, parênteses, multiplicação e
 exponenciação (número elevado a outro).
-## Contenudo
+## Conteúdo
 * Um arquivo main.l 
 * Um arquivo main.y
 * Um arquivo Makefile
