@@ -7,7 +7,7 @@ int yylex(void);
 %}
 
 %token INT MULT DIV SUB SOMA EOL '(' ')' EXP
-%left SOMA SUB
+%left SUB
 %left MULT 
 %left DIV
 %left EXP
@@ -16,7 +16,7 @@ int yylex(void);
 %%
 
 PROGRAMA:
-        PROGRAMA EXPRESSAO EOL { printf("Resultado: %d\n", $2); }
+        PROGRAMA EXPRESSAO EOL { $$=$2 ;}
         |
         ;
 
@@ -28,31 +28,25 @@ EXPRESSAO:
 	|'('EXPRESSAO')'{$$=$2;}
 	
 	|EXPRESSAO EXP EXPRESSAO  {
-	printf("Encontrei potencia: %d ^ %d = ", $1, $3);
-		$$=1;
-        while ($3>0){
-			$$= $$*$1;
-			$3= $3-1;
-		}
-	printf(" %d\n",$$);	
-        }
+	printf ("MOV A, %d \n	MOV B, %d \n	loop:\n 	 MUL A\n	 DEC B\n	 CMP B,0\n	 JNZ loop\n	PUSH A\n", $1, $3);
+	}
 
 	|EXPRESSAO DIV EXPRESSAO  {
-        printf("Encontrei divisao: %d / %d = %d\n", $1, $3, $1/$3);
-        $$ = $1 / $3;
+        printf("MOV A, %d\n MOV B, %d\n DIV B\n PUSH A\n", $1, $3);
+        
         }
 
 	| EXPRESSAO MULT EXPRESSAO  {
-        printf("Encontrei multiplicacao: %d * %d = %d\n", $1, $3, $1*$3);
-        $$ = $1 * $3;
+        printf("MOV A, %d\n MOV B,%d\n MUL B\n PUSH A\n", $1, $3);
+        
         }
 	| EXPRESSAO SUB EXPRESSAO  {
-        printf("Encontrei subtracao: %d - %d = %d\n", $1, $3, $1-$3);
-        $$ = $1 - $3;
+        printf("MOV A,%d\n MOV B,%d\n SUB A,B\n", $1, $3);
+      
         }
 	| EXPRESSAO SOMA EXPRESSAO  {
-        printf("Encontrei soma: %d + %d = %d\n", $1, $3, $1+$3);
-        $$ = $1 + $3;
+        printf("CMP SP, E7\n JNE loop2\n MOV A,%d\n MOV B,%d\n ADD A, B\n loop2:\n POP A\n MOV B,%d\n ADD A,B\n CMP SP, E7\n JNE loop2\n PUSH A\n",$1,$3, $3);
+       
         }
     ;
 

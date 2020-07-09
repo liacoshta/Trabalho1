@@ -381,7 +381,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   33
+#define YYLAST   42
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  12
@@ -437,8 +437,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    19,    19,    20,    25,    28,    30,    40,    45,    49,
-      53
+       0,    19,    19,    20,    25,    28,    30,    34,    39,    43,
+      47
 };
 #endif
 
@@ -462,10 +462,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -11
+#define YYPACT_NINF -7
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-11)))
+  (!!((Yystate) == (-7)))
 
 #define YYTABLE_NINF -1
 
@@ -476,8 +476,8 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -11,     0,   -11,   -11,    21,     7,    15,    21,    21,    21,
-      21,   -11,    21,   -11,    22,   -10,    12,    12,   -11
+      -7,     0,    -7,    -7,    14,     7,    15,    14,    14,    14,
+      14,    -7,    14,    -7,    31,    30,    28,    23,    -6
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -492,7 +492,7 @@ static const yytype_uint8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -11,   -11,    -2
+      -7,    -7,    -2
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -506,18 +506,20 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       2,    12,     6,     3,     0,    14,    15,    16,    17,     4,
-      18,     7,     8,     9,    10,    11,     7,     8,    12,     7,
-       8,     9,    10,    12,     3,    13,    12,     8,     0,     0,
-       4,     0,     0,    12
+       2,    10,     6,     3,     0,    14,    15,    16,    17,     4,
+      18,     7,     8,     9,    10,    11,     0,     3,    12,     7,
+       8,     9,    10,     4,     0,    13,    12,     7,     8,     9,
+      10,     0,     7,     8,    12,    10,     8,    10,    10,    12,
+       0,    12,    12
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,    11,     4,     3,    -1,     7,     8,     9,    10,     9,
-      12,     4,     5,     6,     7,     8,     4,     5,    11,     4,
-       5,     6,     7,    11,     3,    10,    11,     5,    -1,    -1,
-       9,    -1,    -1,    11
+       0,     7,     4,     3,    -1,     7,     8,     9,    10,     9,
+      12,     4,     5,     6,     7,     8,    -1,     3,    11,     4,
+       5,     6,     7,     9,    -1,    10,    11,     4,     5,     6,
+       7,    -1,     4,     5,    11,     7,     5,     7,     7,    11,
+      -1,    11,    11
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -1217,75 +1219,69 @@ yyreduce:
     {
         case 2:
 #line 19 "calc1.y" /* yacc.c:1646  */
-    { printf("Resultado: %d\n", (yyvsp[-1])); }
-#line 1222 "y.tab.c" /* yacc.c:1646  */
+    { (yyval)=(yyvsp[-1]) ;}
+#line 1224 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 25 "calc1.y" /* yacc.c:1646  */
     { (yyval) = (yyvsp[0]);
           }
-#line 1229 "y.tab.c" /* yacc.c:1646  */
+#line 1231 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
 #line 28 "calc1.y" /* yacc.c:1646  */
     {(yyval)=(yyvsp[-1]);}
-#line 1235 "y.tab.c" /* yacc.c:1646  */
+#line 1237 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 30 "calc1.y" /* yacc.c:1646  */
     {
-	printf("Encontrei potencia: %d ^ %d = ", (yyvsp[-2]), (yyvsp[0]));
-		(yyval)=1;
-        while ((yyvsp[0])>0){
-			(yyval)= (yyval)*(yyvsp[-2]);
-			(yyvsp[0])= (yyvsp[0])-1;
-		}
-	printf(" %d\n",(yyval));	
-        }
-#line 1249 "y.tab.c" /* yacc.c:1646  */
+	printf ("MOV A, %d \n	MOV B, %d \n	loop:\n 	 MUL A\n	 DEC B\n	 CMP B,0\n	 JNZ loop\n	PUSH A\n", (yyvsp[-2]), (yyvsp[0]));
+	}
+#line 1245 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 40 "calc1.y" /* yacc.c:1646  */
+#line 34 "calc1.y" /* yacc.c:1646  */
     {
-        printf("Encontrei divisao: %d / %d = %d\n", (yyvsp[-2]), (yyvsp[0]), (yyvsp[-2])/(yyvsp[0]));
-        (yyval) = (yyvsp[-2]) / (yyvsp[0]);
+        printf("MOV A, %d\n MOV B, %d\n DIV B\n PUSH A\n", (yyvsp[-2]), (yyvsp[0]));
+        
         }
-#line 1258 "y.tab.c" /* yacc.c:1646  */
+#line 1254 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 45 "calc1.y" /* yacc.c:1646  */
+#line 39 "calc1.y" /* yacc.c:1646  */
     {
-        printf("Encontrei multiplicacao: %d * %d = %d\n", (yyvsp[-2]), (yyvsp[0]), (yyvsp[-2])*(yyvsp[0]));
-        (yyval) = (yyvsp[-2]) * (yyvsp[0]);
+        printf("MOV A, %d\n MOV B,%d\n MUL B\n PUSH A\n", (yyvsp[-2]), (yyvsp[0]));
+        
         }
-#line 1267 "y.tab.c" /* yacc.c:1646  */
+#line 1263 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 49 "calc1.y" /* yacc.c:1646  */
+#line 43 "calc1.y" /* yacc.c:1646  */
     {
-        printf("Encontrei subtracao: %d - %d = %d\n", (yyvsp[-2]), (yyvsp[0]), (yyvsp[-2])-(yyvsp[0]));
-        (yyval) = (yyvsp[-2]) - (yyvsp[0]);
+        printf("MOV A,%d\n MOV B,%d\n SUB A,B\n", (yyvsp[-2]), (yyvsp[0]));
+      
         }
-#line 1276 "y.tab.c" /* yacc.c:1646  */
+#line 1272 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 53 "calc1.y" /* yacc.c:1646  */
+#line 47 "calc1.y" /* yacc.c:1646  */
     {
-        printf("Encontrei soma: %d + %d = %d\n", (yyvsp[-2]), (yyvsp[0]), (yyvsp[-2])+(yyvsp[0]));
-        (yyval) = (yyvsp[-2]) + (yyvsp[0]);
+        printf("CMP SP, E7\n JNE loop2\n MOV A,%d\n MOV B,%d\n ADD A, B\n loop2:\n POP A\n MOV B,%d\n ADD A,B\n CMP SP, E7\n JNE loop2\n PUSH A\n",(yyvsp[-2]),(yyvsp[0]), (yyvsp[0]));
+       
         }
-#line 1285 "y.tab.c" /* yacc.c:1646  */
+#line 1281 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1289 "y.tab.c" /* yacc.c:1646  */
+#line 1285 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1513,7 +1509,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 59 "calc1.y" /* yacc.c:1906  */
+#line 53 "calc1.y" /* yacc.c:1906  */
 
 
 void yyerror(char *s) {
