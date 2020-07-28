@@ -13,8 +13,9 @@ Linguagem de implementação : Lex/Flex, Yacc/Bison e C.
 A calculadora suporta soma, divisão, parênteses, multiplicação e
 exponenciação (número elevado a outro).
 ## Contenudo
-* Um arquivo main.l 
-* Um arquivo main.y
-* Um arquivo Makefile
-* Um README
+* Um arquivo main.l que permite a interpretação dos simbolos usados no terminal.
+* Um arquivo main.y que organiza a oredem dos opreações e escreve o codigo assembly.
+* Um arquivo Makefile que permite a realização da compilação dos arquivos presentados acima. 
+O usario tem que digitar "make" e "./main" no terminal para poder usar o programa.
+* Um README que descreve o funcionamento e o conteudo do programa
 
