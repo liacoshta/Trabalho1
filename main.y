@@ -41,15 +41,34 @@ EXPRESSAO:
 		}
 	printf(" %d\n",$$);	
         }
-
-	|EXPRESSAO DIV EXPRESSAO  {
-        printf("Encontrei divisao: %d / %d = %d\n", $1, $3, $1/$3);
+|EXPRESSAO DIV EXPRESSAO  {/* operação divisão*/
+        printf("; Encontrei divisao: %d / %d = %d\n", $1, $3, $1/$3);
         $$ = $1 / $3;
+ 	/* Initialisção: registrador a 0, caso ja tinha alguma coisa*/
+        printf("MOV A, 0 \n");
+        printf("MOV B, 0 \n");
+        /*Incio operação*/
+        printf("POP A\n");/* topo copiado no A*/
+        printf("POP B\n");/*novo  topo no B*/
+        printf("DIV B\n");/* resultado da divisao no A*/
+        printf("PUSH A\n"); /*resultado no topo da pilha*/
+        /* retirar os primeros fator de cada pihla e divisar o valor de A por B
+        e retornar o resultado na pilha*/
         }
 
-	| EXPRESSAO MULT EXPRESSAO  {
-        printf("Encontrei multiplicacao: %d * %d = %d\n", $1, $3, $1*$3);
-        $$ = $1 * $3;
+	| EXPRESSAO MULT EXPRESSAO  {/*operação multiplicação*/
+        printf("; Encontrei multiplicacao: %d * %d = %d\n", $1, $3, $1*$3);
+       	$$ = $1 * $3;
+	/* Initialisção: registrador a 0, caso ja tinha alguma coisa*/
+        printf("MOV A, 0 \n");
+        printf("MOV B, 0 \n");
+        /*Incio operação*/
+        printf("POP A\n");/* topo copiado no A*/
+        printf("POP B\n");/*novo  topo no B*/
+        printf("MUL B\n");/* resultado da multiplicacao no A*/
+        printf("PUSH A\n"); /*resultado no topo da pilha*/
+        /* retirar os primeros fator de cada pihla, multiplicar o valor de A por B
+        e retornar o resultado na pilha*/
         }
 
 	| EXPRESSAO SOMA EXPRESSAO  {/*Função da opreção soma*/
