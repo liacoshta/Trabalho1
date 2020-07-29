@@ -33,10 +33,6 @@ void yyerror(char *);
 [*]     {
           return MULT;
         }		
-		
-[-]     {
-          return SUB;
-        }
 
 [+]     {
           return SOMA;
