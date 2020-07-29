@@ -64,8 +64,8 @@ EXPRESSAO:
         printf("MOV A, 0 \n");
         printf("MOV B, 0 \n");
         /*Incio operação*/
-        printf("POP A\n");/* topo copiado no A*/
-        printf("POP B\n");/*novo  topo no B*/
+      	printf("POP B\n");/* topo copiado no B*/
+        printf("POP A\n");/*novo  topo no A*/
         printf("DIV B\n");/* resultado da divisao no A*/
         printf("PUSH A\n"); /*resultado no topo da pilha*/
         /* retirar os primeros fator de cada pihla e divisar o valor de A por B
