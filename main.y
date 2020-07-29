@@ -32,14 +32,30 @@ EXPRESSAO:
 	/*Regras de prioridade*/	  
 	|'('EXPRESSAO')'{$$=$2;}
 	
-	|EXPRESSAO EXP EXPRESSAO  {
-	printf("Encontrei potencia: %d ^ %d = ", $1, $3);
+|EXPRESSAO EXP EXPRESSAO  {/* operação de exponenciação*/
+	printf("; Encontrei potencia: %d ^ %d = ", $1, $3);
 		$$=1;
         while ($3>0){
 			$$= $$*$1;
 			$3= $3-1;
 		}
-	printf(" %d\n",$$);	
+	printf(" %d\n",$$);
+	/* Initialisção: registrador a 0, caso ja tinha alguma coisa*/
+        printf("MOV A, 0 \n");
+        printf("MOV B, 0 \n");
+	printf("MOV C, 0 \n");
+        /*Incio operação*/
+        printf("POP B\n");/* topo(=exposant) copiado no B*/
+        printf("POP C\n");/*novo  topo(=numero elevado) no C*/
+	/*Oprecao MUL acontece no registrador A*/ 
+	printf("MOV A, 1 \n");/*$$=1*/
+	printf("while: CMP B,00 \n");/*O exposant é zero?*/
+	printf("JBE fim\n");/*Se é zero , não tem calculo, não faz o while*/
+        printf("MUL C\n");/* $$=$$*$1 */
+	printf("DEC B\n");/* $3-- */
+	printf("CMP B, 00 \n"); /* O exposant é zero?*/
+	printf("JA while \n");/* Se não é volta por o inicio da loop**/
+        printf("fim: PUSH A\n"); /*resultado no topo da pilha*/
         }
 |EXPRESSAO DIV EXPRESSAO  {/* operação divisão*/
         printf("; Encontrei divisao: %d / %d = %d\n", $1, $3, $1/$3);
@@ -71,7 +87,7 @@ EXPRESSAO:
         e retornar o resultado na pilha*/
         }
 
-	| EXPRESSAO SOMA EXPRESSAO  {/*Função da opreção soma*/
+| EXPRESSAO SOMA EXPRESSAO  {/*Função da opreção soma*/
         printf("; Encontrei soma: %d + %d = %d\n", $1, $3, $1+$3);
         $$ = $1 + $3; /*parte lex em comentario assembly para entender */
 	/* Initialisção: registrador a 0, caso ja tinha alguma coisa*/
